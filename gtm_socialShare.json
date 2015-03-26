@@ -1,0 +1,257 @@
+{
+  "exportFormatVersion": 1.3,
+  "exportTime": "2015-03-26 13:23:32",
+  "containerVersion": {
+    "accountId": "277386",
+    "containerId": "1066790",
+    "containerVersionId": "3",
+    "deleted": false,
+    "container": {
+      "accountId": "277386",
+      "containerId": "1066790",
+      "name": "SocialCode",
+      "publicId": "GTM-M5R4MW",
+      "timeZoneCountryId": "US",
+      "timeZoneId": "America/Los_Angeles",
+      "notes": "",
+      "usageContext": [
+        "WEB"
+      ],
+      "fingerprint": "1427376178545"
+    },
+    "macro": [
+     
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "macroId": "18",
+        "name": "social network",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "socialNetwork"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "1"
+          }
+        ],
+        "fingerprint": "1425393521692"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "macroId": "19",
+        "name": "social action",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "socialAction"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "1"
+          }
+        ],
+        "fingerprint": "1425393543596"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "macroId": "20",
+        "name": "social target",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "socialTarget"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "1"
+          }
+        ],
+        "fingerprint": "1425393627123"
+      }
+    ],
+    "rule": [
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "ruleId": "1",
+        "name": "all pages",
+        "condition": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{url}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": ".*"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1425393653976"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "ruleId": "2",
+        "name": "social sent",
+        "condition": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "social_int"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1425393674709"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "ruleId": "3",
+        "name": "after dom load",
+        "condition": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "gtm.dom"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1425393696687"
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "tagId": "1",
+        "name": "social tracking",
+        "type": "ua",
+        "firingRuleId": [
+          "2"
+        ],
+        "liveOnly": false,
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "socialAction",
+            "value": "{{social action}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useDebugVersion",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "trackingId",
+            "value": "{{google analytics id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "fieldsToSetCustomUi",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "fieldName",
+                    "value": "anonymizeIp"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "trackType",
+            "value": "TRACK_SOCIAL"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableLinkId",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "socialActionTarget",
+            "value": "{{social target}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "socialNetwork",
+            "value": "{{social network}}"
+          }
+        ],
+        "fingerprint": "1425393779448"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1066790",
+        "tagId": "2",
+        "name": "social share",
+        "type": "html",
+        "firingRuleId": [
+          "3"
+        ],
+        "liveOnly": false,
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n/*AddThis*/\nif (typeof addthis === 'object') {\n    addThisEventHandler = function(evt) {\n        switch (evt.type) {\n            case \"addthis.menu.share\":\n\nvar c = evt.data.service.charAt(0).toUpperCase() + evt.data.service.substring(1);\n                gt.push({\n                    'event': 'social_int',\n                    'socialNetwork': c,\n                    'socialAction': 'AddThis Share',\n                    'socialTarget': evt.data.url\n                });\n             break;\n            default:console.log('GoogleTagManager - SocialShare: received an unexpected event', evt);\n        }};\n    addthis.addEventListener('addthis.menu.share', addThisEventHandler);\n}\n\n\n/*Facebook*/\nif (typeof FB !== 'undefined'){\n  FB.Event.subscribe('edge.create',\n      function(href) {\n          gt.push({\n              'event': 'social_int', \n              'socialNetwork': 'Facebook', \n              'socialAction': 'Like', \n              'socialTarget': href\n          });\n      }\n  );\n\n  FB.Event.subscribe('comment.create',\n      function(response) {\n          gt.push({\n              'event': 'social_int', \n              'socialNetwork': 'Facebook', \n              'socialAction': 'Comment', \n              'socialTarget': response.href\n          });\n      }\n  );\n\n}\n/*Twitter*/\nif (typeof twttr !== 'undefined') {\n  twttr.ready(function (twttr) {\n    twttr.events.bind('click', clickEventToAnalytics);  \n  });\n}\nfunction clickEventToAnalytics() {\ngt.push({\n              'event': 'social_int', \n              'socialNetwork': 'Twitter', \n              'socialAction': 'tweet', \n              'socialTarget': window.location.href\n          });\n}\n</script>"
+          }
+        ],
+        "fingerprint": "1427376178545"
+      }
+    ],
+    "fingerprint": "1427376202860"
+  }
+}
