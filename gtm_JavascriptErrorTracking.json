@@ -1,0 +1,260 @@
+{
+  "exportFormatVersion": 1.3,
+  "exportTime": "2015-03-26 13:54:43",
+  "containerVersion": {
+    "accountId": "277386",
+    "containerId": "1123769",
+    "containerVersionId": "2",
+    "deleted": false,
+    "container": {
+      "accountId": "277386",
+      "containerId": "1123769",
+      "name": "JavascriptErrorCode",
+      "publicId": "GTM-TJZ6CV",
+      "timeZoneCountryId": "US",
+      "timeZoneId": "America/Los_Angeles",
+      "notes": "",
+      "usageContext": [
+        "WEB"
+      ],
+      "fingerprint": "1427378022037"
+    },
+    "macro": [
+     
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "macroId": "28",
+        "name": "javascript error message",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "gtm.errorMessage"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          }
+        ],
+        "fingerprint": "1427378022037"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "macroId": "29",
+        "name": "javascript error line",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "gtm.errorLineNumber"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          }
+        ],
+        "fingerprint": "1427378001688"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "macroId": "30",
+        "name": "javascript error url",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "gtm.errorUrl"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          }
+        ],
+        "fingerprint": "1427378012663"
+      }
+    ],
+    "rule": [
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "ruleId": "7",
+        "name": "all pages",
+        "condition": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{url}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": ".*"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1427377845073"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "ruleId": "8",
+        "name": "javascript error",
+        "condition": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "gtm.pageError"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1427377845074"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "ruleId": "10",
+        "name": "after dom load",
+        "condition": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "gtm.dom"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1427377845075"
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "tagId": "7",
+        "name": "javascript error listener",
+        "type": "jel",
+        "firingRuleId": [
+          "7"
+        ],
+        "liveOnly": false,
+        "fingerprint": "1427377845082"
+      },
+      {
+        "accountId": "277386",
+        "containerId": "1123769",
+        "tagId": "8",
+        "name": "javascript error tracking",
+        "type": "ua",
+        "firingRuleId": [
+          "8"
+        ],
+        "liveOnly": false,
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "enableEcommerce",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventValue",
+            "value": "{{javascript error line}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "useDebugVersion",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "trackingId",
+            "value": "{{google analytics id}}"
+          },
+          {
+            "type": "LIST",
+            "key": "fieldsToSetCustomUi",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "fieldName",
+                    "value": "anonymizeIp"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "trackType",
+            "value": "TRACK_EVENT"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "nonInteraction",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableLinkId",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventLabel",
+            "value": "{{javascript error url}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventAction",
+            "value": "{{javascript error message}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventCategory",
+            "value": "Error"
+          }
+        ],
+        "fingerprint": "1427378022037"
+      }
+    ],
+    "fingerprint": "1427378073764"
+  }
+}
