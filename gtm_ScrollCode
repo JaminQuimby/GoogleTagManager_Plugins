@@ -1,0 +1,291 @@
+{
+    "exportFormatVersion": 1.3,
+    "exportTime": "2015-03-25 20:49:10",
+    "containerVersion": {
+        "accountId": "277386",
+        "containerId": "1121871",
+        "containerVersionId": "2",
+        "deleted": false,
+        "container": {
+            "accountId": "277386",
+            "containerId": "1121871",
+            "name": "ScrollCode",
+            "publicId": "GTM-58NP7N",
+            "timeZoneCountryId": "US",
+            "timeZoneId": "America/Los_Angeles",
+            "notes": "",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1427316506258"
+        },
+        "macro": [
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "macroId": "61",
+                "name": "scroll category",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "scrollCategory"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "1"
+                    }
+                ],
+                "fingerprint": "1427316415202"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "macroId": "62",
+                "name": "scroll action",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "scrollAction"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "1"
+                    }
+                ],
+                "fingerprint": "1427316415203"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "macroId": "63",
+                "name": "scroll label",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "scrollLabel"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "1"
+                    }
+                ],
+                "fingerprint": "1427316415203"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "macroId": "64",
+                "name": "scroll value",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "scrollValue"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "1"
+                    }
+                ],
+                "fingerprint": "1427316415203"
+            }
+        ],
+        "rule": [
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "ruleId": "6",
+                "name": "all pages",
+                "condition": [
+                    {
+                        "type": "MATCH_REGEX",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{url}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": ".*"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1427316415196"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "ruleId": "8",
+                "name": "after dom load",
+                "condition": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "gtm.dom"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1427316415197"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "ruleId": "9",
+                "name": "scroll distance",
+                "condition": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "scrollDistance"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1427316415197"
+            }
+        ],
+        "tag": [
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "tagId": "9",
+                "name": "scroll code",
+                "type": "html",
+                "firingRuleId": [
+                    "8"
+                ],
+                "liveOnly": false,
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n;(function($, window, document, undefined) {\n\n\n  \"use strict\";\n\n    \n  var defaults = {\n    minHeight: 0,\n    elements: [],\n    percentage: true,\n    userTiming: true,\n    pixelDepth: true,\n    nonInteraction: true,\n    window:$(window),\n    cache:[],\n    lastPixelDepth:0,\n    standardEventHandler:\"\"\n    \n  };\n\n  var $window = $(window),\n    cache = [],\n    lastPixelDepth = 0,\n    universalGA=true,\n    standardEventHandler;\n\n  /*\n   * Plugin\n   */\n\n  $.scrollDepth = function(options) {\n\n    var startTime = +new Date();\n\n    options = $.extend({}, defaults, options);\n\n    // Return early if document height is too small\n    if ( $(document).height() < options.minHeight ) {\n      return;\n    }\n\n\n    if (typeof options.eventHandler === \"function\") {\n      standardEventHandler = options.eventHandler;\n    } else if (typeof gt !== \"undefined\" && typeof gt.push === \"function\") {\n      standardEventHandler = gt.push;\n    }\n\n    if (options.percentage) {\n      // Establish baseline (0% scroll)\n      sendBaseline('Percentage');\n    } else if (options.elements) {\n      sendBaseline('Elements');\n    }\n\n    /*\n     * Functions\n     */\n\n    /*\n     * Putting this in a separate function because the Baseline event may soon be removed entirely\n     */\n      \n      \n      \n      \nfunction sendBaseline(action, label) {\n\n      if (standardEventHandler) {\n\n     standardEventHandler({'event': 'scrollDistance', 'scrollCategory': 'Scroll Depth', 'scrollAction': action, 'scrollLabel': 'Baseline', 'scrollValue': 1, 'eventNonInteraction': true });\n\n      } else {\n\n        if (universalGA) {\n\n  ga('send', 'event', 'Scroll Depth', action, 'Baseline', 1, {'nonInteraction': true });\n\n        }\n\n\n      }\n\n    }\n\n    function sendEvent(action, label, scrollDistance, timing) {\n\n      if (standardEventHandler) {\n\n        standardEventHandler({'event': 'scrollDistance', 'scrollCategory': 'Scroll Depth', 'scrollAction': action, 'scrollLabel': label, 'scrollValue': 1, 'eventNonInteraction': options.nonInteraction});\n\n        if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {\n          lastPixelDepth = scrollDistance;\nstandardEventHandler({'event': 'scrollDistance', 'scrollCategory': 'Scroll Depth', 'scrollAction': 'Pixel Depth', 'scrollLabel': rounded(scrollDistance), 'eventValue': 1, 'eventNonInteraction': options.nonInteraction});\n\n        }\n\n        if (options.userTiming && arguments.length > 3) {\n          standardEventHandler({'event': 'scrollTiming', 'scrollCategory': 'Scroll Depth', 'scrollAction': action, 'scrollLabel': label, 'scrollTiming': timing});\n            \n\n        }\n\n      } else {\n\n        if (universalGA) {\n\n          ga('send', 'event', 'Scroll Depth', action, label, 1, {'nonInteraction': options.nonInteraction});\n\n          if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {\n            lastPixelDepth = scrollDistance;\n            ga('send', 'event', 'Scroll Depth', 'Pixel Depth', rounded(scrollDistance), 1, {'nonInteraction': options.nonInteraction});\n\n          }\n\n          if (options.userTiming && arguments.length > 3) {\n            ga('send', 'timing', 'Scroll Depth', action, timing, label);\n\n          }\n\n        }\n\n\n      }\n\n    }\n\n    function calculateMarks(docHeight) {\n      return {\n        '25%' : parseInt(docHeight * 0.25, 10),\n        '50%' : parseInt(docHeight * 0.50, 10),\n        '75%' : parseInt(docHeight * 0.75, 10),\n        // 1px cushion to trigger 100% event in iOS\n        '100%': docHeight - 5\n      };\n    }\n\n    function checkMarks(marks, scrollDistance, timing) {\n      // Check each active mark\n      $.each(marks, function(key, val) {\n        if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {\n          sendEvent('Percentage', key, scrollDistance, timing);\n          cache.push(key);\n        }\n      });\n    }\n\n    function checkElements(elements, scrollDistance, timing) {\n      $.each(elements, function(index, elem) {\n        if ( $.inArray(elem, cache) === -1 && $(elem).length ) {\n          if ( scrollDistance >= $(elem).offset().top ) {\n            sendEvent('Elements', elem, scrollDistance, timing);\n            cache.push(elem);\n          }\n        }\n      });\n    }\n\n    function rounded(scrollDistance) {\n      // Returns String\n      return (Math.floor(scrollDistance/250) * 250).toString();\n    }\n\n    /*\n     * Throttle function borrowed from:\n     * Underscore.js 1.5.2\n     * http://underscorejs.org\n     * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors\n     * Underscore may be freely distributed under the MIT license.\n     */\n\n    function throttle(func, wait) {\n      var context, args, result;\n      var timeout = null;\n      var previous = 0;\n      var later = function() {\n        previous = new Date;\n        timeout = null;\n        result = func.apply(context, args);\n      };\n      return function() {\n        var now = new Date();\n        if (!previous) previous = now;\n        var remaining = wait - (now - previous);\n        context = this;\n        args = arguments;\n        if (remaining <= 0) {\n          clearTimeout(timeout);\n          timeout = null;\n          previous = now;\n          result = func.apply(context, args);\n        } else if (!timeout) {\n          timeout = setTimeout(later, remaining);\n        }\n        return result;\n      };\n    }\n\n    /*\n     * Scroll Event\n     */\n\n    $window.on('scroll.scrollDepth', throttle(function() {\n\n        var f ={\n        \n        };\n\n      var docHeight = $(document).height(),\n        winHeight = window.innerHeight ? window.innerHeight : $window.height(),\n        scrollDistance = $window.scrollTop() + winHeight,\n\n        // Recalculate percentage marks\n        marks = calculateMarks(docHeight),\n\n        // Timing\n        timing = +new Date() - startTime;\n\n      // If all marks already hit, unbind scroll event\n      if (cache.length >= 4 + options.elements.length) {\n        $window.off('scroll.scrollDepth');\n        return;\n      }\n\n      // Check specified DOM elements\n      if (options.elements) {\n        checkElements(options.elements, scrollDistance, timing);\n      }\n\n      // Check standard marks\n      if (options.percentage) {\n        checkMarks(marks, scrollDistance, timing);\n      }\n    }, 500));\n\n  };\n})( jQuery, window, document );  $.scrollDepth();\n</script>"
+                    }
+                ],
+                "fingerprint": "1427316415206"
+            },
+            {
+                "accountId": "277386",
+                "containerId": "1121871",
+                "tagId": "10",
+                "name": "scroll tracking",
+                "type": "ua",
+                "firingRuleId": [
+                    "9"
+                ],
+                "liveOnly": false,
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableEcommerce",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventValue",
+                        "value": "{{scroll value}}"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "useDebugVersion",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "{{google analytics id}}"
+                    },
+                    {
+                        "type": "LIST",
+                        "key": "fieldsToSetCustomUi",
+                        "list": [
+                            {
+                                "type": "MAP",
+                                "map": [
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "fieldName",
+                                        "value": "anonymizeIp"
+                                    },
+                                    {
+                                        "type": "TEMPLATE",
+                                        "key": "value",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableLinkId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{scroll label}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{scroll action}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "{{scroll category}}"
+                    }
+                ],
+                "fingerprint": "1427316415207"
+            }
+        ],
+        "fingerprint": "1427316523602"
+    }
+}
